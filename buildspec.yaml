@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    commands: # installing panorama cli
+      - yum install git -y 
+      - aws --version
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands: # TODO: download from S3 and upload to S3, rmb to grant S3 access to IAM.
+      - export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - aws s3 cp panorama-app-af900960-283a-11ed-adea-0696c6553af6 ./
+      - tar zxvf $MODEL_NAME
+      - git status  
+  post_build:
+    commands:
+      - echo Upload Success 
