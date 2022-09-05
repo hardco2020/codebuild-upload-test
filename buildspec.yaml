@@ -12,7 +12,7 @@ phases:
     commands: # TODO: download from S3 and upload to S3, rmb to grant S3 access to IAM.
       - export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - aws s3 cp s3://panorama-app-af900960-283a-11ed-adea-0696c6553af6/ppe_panorama_app.zip ./
-      - tar zxvf ppe_panorama_app.zip
+      - unzip ppe_panorama_app.zip
       - git status  
   post_build:
     commands:
